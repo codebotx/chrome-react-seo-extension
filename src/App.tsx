@@ -4,6 +4,7 @@ import { DOMMessage, DOMMessageResponse } from './types';
 function App() {
   const [title, setTitle] = React.useState('');
   const [headlines, setHeadlines] = React.useState<string[]>([]);
+  const [secheadlines, setSecheadlines] = React.useState<string[]>([]);
 
   async function getCurrentTab() {
     let queryOptions = { active: true, lastFocusedWindow: true };
@@ -33,6 +34,7 @@ function App() {
         (response: DOMMessageResponse) => {
           setTitle(response.title);
           setHeadlines(response.headlines);
+          setSecheadlines(response.secheadlines);
         },
       );
       // console.log({ type: 'GET_DOM' } as DOMMessage);
@@ -42,14 +44,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1>SEO Extension built with React!</h1>
+      <h1>Here are your titles and headings</h1>
 
       <ul className="SEOForm">
         <li className="SEOValidation">
           <div className="SEOValidationField">
-            <span className="SEOValidationFieldTitle">Title</span>
+            <span className="SEOValidationFieldTitle">Title: </span>
             <span className={`SEOValidationFieldStatus ${title.length < 30 || title.length > 65 ? 'Error' : 'Ok'}`}>
-              {title.length + " "}  Characters
+              {title.length + " "}  characters
             </span>
           </div>
           <div className="SEOVAlidationFieldValue">
@@ -59,7 +61,7 @@ function App() {
 
         <li className="SEOValidation">
           <div className="SEOValidationField">
-            <span className="SEOValidationFieldTitle">Main Heading</span>
+            <span className="SEOValidationFieldTitle">Main Headings</span>
             <span className={`SEOValidationFieldStatus ${headlines.length !== 1 ? 'Error' : 'Ok'}`}>
               {headlines.length}
             </span>
@@ -70,6 +72,21 @@ function App() {
             </ul>
           </div>
         </li>
+
+        <li className="SEOValidation">
+          <div className="SEOValidationField">
+            <span className="SEOValidationFieldTitle">Secondary Headings</span>
+            <span className={`SEOValidationFieldStatus ${secheadlines.length !== 1 ? 'Error' : 'Ok'}`}>
+              {secheadlines.length}
+            </span>
+          </div>
+          <div className="SEOVAlidationFieldValue">
+            <ul>
+              {secheadlines.map((secheadline, index) => (<li key={index}>{secheadline}</li>))}
+            </ul>
+          </div>
+        </li>
+
       </ul>
     </div>
   );
