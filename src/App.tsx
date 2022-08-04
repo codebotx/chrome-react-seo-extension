@@ -76,7 +76,7 @@ function App() {
         <li className="SEOValidation">
           <div className="SEOValidationField">
             <span className="SEOValidationFieldTitle">Secondary Headings</span>
-            <span className={`SEOValidationFieldStatus ${secheadlines.length !== 1 ? 'Error' : 'Ok'}`}>
+            <span className={`SEOValidationFieldStatus ${secheadlines.length === 1 ? 'Error' : 'Ok'}`}>
               {secheadlines.length}
             </span>
           </div>
