@@ -5,6 +5,7 @@ function App() {
   const [title, setTitle] = React.useState('');
   const [headlines, setHeadlines] = React.useState<string[]>([]);
   const [secheadlines, setSecheadlines] = React.useState<string[]>([]);
+  const [terheadlines, setTerheadlines] = React.useState<string[]>([]);
 
   async function getCurrentTab() {
     let queryOptions = { active: true, lastFocusedWindow: true };
@@ -35,6 +36,7 @@ function App() {
           setTitle(response.title);
           setHeadlines(response.headlines);
           setSecheadlines(response.secheadlines);
+          setTerheadlines(response.terheadlines);
         },
       );
       // console.log({ type: 'GET_DOM' } as DOMMessage);
@@ -83,9 +85,27 @@ function App() {
           <div className="SEOVAlidationFieldValue">
             <ul>
               {secheadlines.map((secheadline, index) => (<li key={index}>{secheadline}</li>))}
+
             </ul>
           </div>
         </li>
+        <li className="SEOValidation">
+          <div className="SEOValidationField">
+            <span className="SEOValidationFieldTitle">Other Headings</span>
+            <span className={`SEOValidationFieldStatus ${terheadlines.length === 1 ? 'Error' : 'Ok'}`}>
+              {terheadlines.length}
+            </span>
+          </div>
+          <div className="SEOVAlidationFieldValue">
+            <ul>
+              {terheadlines.map((terheadline, index) => (<li key={index}>{terheadline}</li>))}
+
+            </ul>
+          </div>
+        </li>
+
+
+
 
       </ul>
     </div>

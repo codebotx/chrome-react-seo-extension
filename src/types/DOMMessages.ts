@@ -6,5 +6,6 @@ export type DOMMessageResponse = {
   title: string;
   headlines: string[];
   secheadlines: string[];
+  terheadlines: string[];
 
 }
